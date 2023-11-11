@@ -1,0 +1,118 @@
+.prose {
+  & > :is(h2, h3) {
+    @apply scroll-mt-24;
+
+    a {
+      border-bottom: 0 !important;
+
+      span {
+        @apply text-black dark:text-white;
+      }
+
+      &::after {
+        @apply gradient-title ml-2 inline-block opacity-0
+               transition-opacity duration-300 content-['#'];
+      }
+
+      &:hover,
+      &:focus-visible {
+        &::after {
+          @apply opacity-100;
+        }
+      }
+    }
+  }
+
+  & :where(code):not(:where([class~='not-prose'] *)) {
+    @apply main-border rounded-md p-1;
+  }
+
+  @mixin border-gradient($position) {
+    border-image: linear-gradient(
+        to $position,
+        theme('colors.blue.400'),
+        theme('colors.green.300')
+      )
+      1;
+  }
+
+  blockquote {
+    @include border-gradient(top);
+
+    p:first-of-type::before,
+    p:last-of-type::after {
+      @apply content-none;
+    }
+  }
+
+  hr {
+    @include border-gradient(right);
+  }
+
+  div[data-rehype-pretty-code-fragment] {
+    @apply relative grid;
+
+    div[data-rehype-pretty-code-title] {
+      @apply hidden;
+
+      &:first-of-type {
+        @apply gradient-title main-border absolute left-6 z-10 block 
+               rounded-b-md border-t-0 px-2 font-medium;
+      }
+
+      & + pre > code {
+        @apply mt-8;
+      }
+    }
+
+    pre {
+      opacity: 0.98;
+      padding: 0.75rem 0 !important;
+
+      @apply main-border my-0;
+
+      &[data-theme='light'] {
+        @apply bg-white dark:hidden;
+      }
+
+      &[data-theme='dark'] {
+        @apply hidden bg-black dark:block;
+      }
+
+      code {
+        counter-reset: line;
+
+        @apply grid;
+
+        .word {
+          background: rgba(200, 200, 255, 0.15);
+
+          @apply rounded p-1;
+        }
+
+        .line {
+          @apply border-l-2 border-transparent px-5 py-0;
+
+          &.highlighted {
+            background: rgba(200, 200, 255, 0.1);
+
+            @apply border-l-blue-400;
+          }
+        }
+
+        &[data-line-numbers] {
+          .line::before {
+            content: counter(line);
+            counter-increment: line;
+
+            @apply mr-4 inline-block w-4 text-right text-slate-600;
+          }
+
+          .line.highlighted::before {
+            @apply text-slate-800 dark:text-slate-400;
+          }
+        }
+      }
+    }
+  }
+}

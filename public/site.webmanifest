@@ -1,0 +1,22 @@
+{
+  "name": "Adin Fauzan | Fullstack Developer",
+  "short_name": "Adin Fauzan | Fullstack Developer",
+  "description": "An online portfolio and blog by Adin Fauzan. Showcase some of my past projects and some of my thoughts on the world of web development.",
+  "display": "standalone",
+  "start_url": "/",
+  "theme_color": "#fff",
+  "background_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
